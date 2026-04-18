@@ -16,7 +16,7 @@ final class APIManager {
         
         //    Step-0
         //  API End-Point URL string
-        let urlstr = "https://official-joke-api.appspot.com/jokes/random/25"
+        let urlstr = "https://jsonplaceholder.typicode.com/todos"
         
         //    Step-1
         // Validating URL:
@@ -29,24 +29,28 @@ final class APIManager {
             // initiating dataTask
             let dataTask = session.dataTask(with: url) { data, res, err in
                 
-                guard let jsonData = data else {return}
+                guard let bufferData = data else {return}
                 do {
                     // Step-4:
-                    //  decoding JSONDecoder
-                    //  using in-built func() called .decode() from JSONDecoder Class.
-                    let decodedData = try JSONDecoder().decode([JokeModel].self, from: jsonData)
+                    //  decoding using in-built JSONDecoder class,
+                    //  which has in-built func() called .decode()
+                    let decodedData = try JSONDecoder().decode([TodoModel].self, from: bufferData)
+                    
+                    // prints decoded json data in your local debug console
                     print(decodedData)
+                    
                     //  print() this to see raw data, URLresponse and error.
                     //      print(data)
                     //      print(res)
                     //      print(err)
+                    
                 } catch (let err) {
                     //  localizedDescription helps to read error in more human readable way.
                     print(err.localizedDescription)
                 }
                 
             }
-            //  API code doesnt works if not called this func
+            //  your API code doesn't works if not called this func. no brainer ikik, but we are learning
             dataTask.resume()
         } else {
             //  check url if this get prints
