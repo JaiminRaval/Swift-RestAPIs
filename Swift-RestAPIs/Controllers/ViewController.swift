@@ -9,6 +9,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // Don't forget to call api func() as you guys do always :)
+        APIManager.shared.callAPI()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
